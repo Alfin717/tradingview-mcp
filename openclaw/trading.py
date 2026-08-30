@@ -7,6 +7,7 @@ import os
 def run_dummy_server():
     PORT = int(os.environ.get("PORT", 10000))
     Handler = http.server.SimpleHTTPRequestHandler
+    socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
         print(f"Dummy server running on port {PORT}")
         httpd.serve_forever()
