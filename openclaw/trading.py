@@ -1,3 +1,20 @@
+# --- KODE TAMBAHAN UNTUK RENDER GRATISAN ---
+import http.server
+import socketserver
+import threading
+import os
+
+def run_dummy_server():
+    PORT = int(os.environ.get("PORT", 10000))
+    Handler = http.server.SimpleHTTPRequestHandler
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print(f"Dummy server running on port {PORT}")
+        httpd.serve_forever()
+
+# Jalankan server web palsu di latar belakang sebelum kode utama Anda
+threading.Thread(target=run_dummy_server, daemon=True).start()
+# -------------------------------------------
+
 #!/usr/bin/env python3
 """
 CLI wrapper for tradingview-mcp — called by OpenClaw agent via bash.
